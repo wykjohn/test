@@ -11,6 +11,9 @@ jobs:
     steps:
     - name: Set up environment
       run: sudo apt-get update && sudo apt-get install -y rpm mailutils
+      
+    - name: Install uuencode
+      run: sudo apt-get install -y sharutils
 
     - name: Get system information
       run: |
