@@ -27,4 +27,5 @@ jobs:
       env:
         TO_EMAIL: wykjohn@gmail.com
       run: |
-        echo "System Report from GitHub Actions" | mail -s "System Report" -a sysinfo.txt $TO_EMAIL
+        echo "System Report from GitHub Actions" | mail -s "System Report" -a ~/sysinfo.txt $TO_EMAIL
+  
