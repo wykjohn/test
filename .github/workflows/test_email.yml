@@ -14,14 +14,14 @@ jobs:
 
     - name: Get system information
       run: |
-        echo "OS Version:" > sysinfo.txt
-        cat /etc/os-release >> sysinfo.txt
+        echo "OS Version:" > ~/sysinfo.txt
+        cat /etc/os-release >> ~/sysinfo.txt
 
-        echo -e "\nInstalled RPMs:" >> sysinfo.txt
-        rpm -qa >> sysinfo.txt || echo "RPM not supported on this system" >> sysinfo.txt
+        echo -e "\nInstalled RPMs:" >> ~/sysinfo.txt
+        rpm -qa >> ~/sysinfo.txt || echo "RPM not supported on this system" >> ~/sysinfo.txt
 
-        echo -e "\nRoot ulimits:" >> sysinfo.txt
-        sudo bash -c 'ulimit -a' >> sysinfo.txt
+        echo -e "\nRoot ulimits:" >> ~/sysinfo.txt
+        sudo bash -c 'ulimit -a' >> ~/sysinfo.txt
 
     - name: Email the report
       env:
