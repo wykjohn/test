@@ -1,0 +1,29 @@
+name: System Info Emailer
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  system-info:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Set up environment
+      run: sudo apt-get update && sudo apt-get install -y rpm mailutils
+
+    - name: Get system information
+      run: |
+        echo "OS Version:" > sysinfo.txt
+        cat /etc/os-release >> sysinfo.txt
+
+        echo -e "\nInstalled RPMs:" >> sysinfo.txt
+        rpm -qa >> sysinfo.txt || echo "RPM not supported on this system" >> sysinfo.txt
+
+        echo -e "\nRoot ulimits:" >> sysinfo.txt
+        sudo bash -c 'ulimit -a' >> sysinfo.txt
+
+    - name: Email the report
+      env:
+        TO_EMAIL: your_email@example.com
+      run: |
+        echo "System Report from GitHub Actions" | mail -s "System Report" -a sysinfo.txt $TO_EMAIL
